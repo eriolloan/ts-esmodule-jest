@@ -4,14 +4,11 @@
   "description": "Boilerplate for ECMAScript modules in TS with jest testing",
   "type": "module",
   "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    }
+    ".": "./dist/index.js"
   },
+  "types": "./dist/types/index.d.ts",
   "files": [
-    "/src",
-    "/dist"
+    "/dist/**/*"
   ],
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
