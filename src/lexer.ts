@@ -2,10 +2,10 @@ import moo from 'moo'
 
 const lexer = moo.compile({
 	whitespace: /[ \t]+/,
+	fragmentSign: '#',
 	comment: /\/\/.*?$/,
 	number: /[0-9]+/,
-	boolean: [ 'true', 'false' ],
-	identifier: /[a-zA-Z][a-z_.]*/,
+	span: /(?:\\["\\]|[^\n"\\])+/,
 	keyword: /[A-Z][A-Z]+/,
 	string: /"(?:\\["\\]|[^\n"\\])*"/,
 	condition: /==/,
@@ -19,7 +19,6 @@ const lexer = moo.compile({
 	rbrace: '}',
 	lsqbrace: '[',
 	rsqbrace: ']',
-	fragmentSign: '#',
 	newline: { match: /\n/, lineBreaks: true },
 })
 

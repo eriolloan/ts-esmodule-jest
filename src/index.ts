@@ -2,9 +2,13 @@
 import { parser } from "./parser"
 
 // parse something
-parser.feed('var = 2')
+parser.feed(`# Coucou
+Voila un paragraphe.
+Une autre ligne dans le même paragraphe.
 
-console.log(parser.results)
+Et ça, c'est un nouveau paragraphe.`)
+
+console.log(JSON.stringify(parser.results, null, '    '))
 
 // const sample = `This page title // Text link
 
@@ -15,7 +19,7 @@ console.log(parser.results)
 // ==  IN Location
 //     AND AFTER Chapter1
 
-// =>	CharacterA.variableX = true
+// =>	CharacterA.variableX = trueparser.results
 // =>	NEXT the flow should move to the next part in the current axis after the page is read
 
 // ::	PALETTE Palette_02
