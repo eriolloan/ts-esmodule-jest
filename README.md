@@ -1,6 +1,6 @@
-# TS ESModule Jest
+# HB Parser
 
-`ts-esmodule-jest` is a boilerplate for kickstarting ESM modules written in TypeScript. Jest and ts-jest are used for testing.
+Lexing and parsing for HB Node files.
 
 ## Installation
 
@@ -8,7 +8,7 @@
 
 From this module :
 ```
-	$ cd ./[ REPLACE ]
+	$ cd ./hb-parser
 	$ npm link --registry http://localhost:4873/
 ```
 
@@ -16,12 +16,12 @@ From consuming module:
 ```
 	$ cd ./consumer-project
 	$ npm init  // if not already done
-	$ npm link --registry http://localhost:4873/ '[ REPLACE ]'
+	$ npm link --registry http://localhost:4873/ @hb/parser
 ```
 
 Then you can import :
 ```
-import { [ REPLACE ] } from '[ REPLACE ]'
+import { [ REPLACE ] } from '@hb/parser'
 ```
 
 ## Scripts in `package.json`
@@ -29,6 +29,7 @@ import { [ REPLACE ] } from '[ REPLACE ]'
 - `npm run build` transpiles TS files found in `./src` to ES2020 JS in `./dist`.
 - `npm run dev` executes transpiles to JS before running compiled files.
 - `npm run test` executes tests. It will not fail if no tests are written.
+- `npm run gen-parser` produces the grammar js file from `grammar.ne`. Note that after generating it, you should remove the file extension in the import statement (it should say : `import { lexer } from '../lexer'`).
 
 
 Collocation of tests is prefered.
