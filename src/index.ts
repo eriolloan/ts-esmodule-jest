@@ -3,7 +3,7 @@ import { parser } from "./parser"
 
 // parse something
 parser.feed(`# Coucou
-Voila un paragraphe.
+Voila un paragraphe. Avec 2 spans.
 Une autre ligne dans le même paragraphe.
 
 Et ça, c'est un nouveau paragraphe.`)

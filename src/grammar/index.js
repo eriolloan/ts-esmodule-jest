@@ -18,13 +18,16 @@ let ParserRules = [
         }
         		},
     {"name": "fragment$ebnf$1", "symbols": []},
-    {"name": "fragment$ebnf$1", "symbols": ["fragment$ebnf$1", "paragraph"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "fragment$ebnf$1$subexpression$1$ebnf$1", "symbols": []},
+    {"name": "fragment$ebnf$1$subexpression$1$ebnf$1", "symbols": ["fragment$ebnf$1$subexpression$1$ebnf$1", (lexer.has("newline") ? {type: "newline"} : newline)], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "fragment$ebnf$1$subexpression$1", "symbols": ["fragment_item", "fragment$ebnf$1$subexpression$1$ebnf$1"]},
+    {"name": "fragment$ebnf$1", "symbols": ["fragment$ebnf$1", "fragment$ebnf$1$subexpression$1"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "fragment", "symbols": ["fragment_id", "fragment$ebnf$1"], "postprocess": 
         (data) => {
         	return {
         		type: 'fragment',
         		id: data[0],
-        		content: data[1]
+        		content: data[1][0]
         	}
         }
         		},
@@ -35,6 +38,9 @@ let ParserRules = [
     {"name": "fragment_id", "symbols": [(lexer.has("fragmentSign") ? {type: "fragmentSign"} : fragmentSign), "_", "fragment_id$ebnf$1", "_", "fragment_id$ebnf$2"], "postprocess": 
         (data) => data[2].value
         		},
+    {"name": "fragment_item", "symbols": ["paragraph"], "postprocess": 
+        (data) => data[0]
+        		},
     {"name": "paragraph", "symbols": [(lexer.has("span") ? {type: "span"} : span)], "postprocess": 
         (data) => {
         	return {
@@ -44,8 +50,8 @@ let ParserRules = [
         }
         		},
     {"name": "paragraph$subexpression$1", "symbols": ["_"]},
-    {"name": "paragraph$subexpression$1$ebnf$1", "symbols": []},
-    {"name": "paragraph$subexpression$1$ebnf$1", "symbols": ["paragraph$subexpression$1$ebnf$1", (lexer.has("newline") ? {type: "newline"} : newline)], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "paragraph$subexpression$1$ebnf$1", "symbols": [(lexer.has("newline") ? {type: "newline"} : newline)], "postprocess": id},
+    {"name": "paragraph$subexpression$1$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
     {"name": "paragraph$subexpression$1", "symbols": ["paragraph$subexpression$1$ebnf$1"]},
     {"name": "paragraph", "symbols": ["paragraph", "paragraph$subexpression$1", (lexer.has("span") ? {type: "span"} : span)], "postprocess": 
         (data) => {

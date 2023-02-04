@@ -34,13 +34,13 @@ var_assign
 
 
 fragment
-	-> fragment_id  paragraph:*
+	-> fragment_id  (fragment_item %newline:*):*
 		{%
 			(data) => {
 				return {
 					type: 'fragment',
 					id: data[0],
-					content: data[1]
+					content: data[1][0]
 				}
 			}
 		%}
@@ -53,6 +53,11 @@ fragment_id
 		%}
 
 
+fragment_item
+	-> paragraph # add others later (ie. side-effects)
+		{%
+			(data) => data[0]
+		%}
 
 paragraph
 	-> %span
@@ -64,7 +69,7 @@ paragraph
 				}
 			}
 		%}
-	 | paragraph (_ | %newline:*) %span
+	 | paragraph (_ | %newline:?) %span
 		{%
 			(data) => {
 				return {
@@ -85,3 +90,4 @@ _ -> %whitespace:*
 
 # 1 or more spaces (== mandatory spaces)
 __ -> %whitespace:+
+
